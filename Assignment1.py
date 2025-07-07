@@ -8,6 +8,7 @@ def insertion_sort(arr):
         arr[j + 1] = key
     return arr
 
-num_list = [10, 3, 7, 2, 8]
+user_input = input("Enter numbers separated by spaces: ")
+num_list = [int(x) for x in user_input.strip().split()]
 sorted_list = insertion_sort(num_list)
 print("Sorted in decreasing order:", sorted_list)
