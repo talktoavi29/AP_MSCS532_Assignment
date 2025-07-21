@@ -24,3 +24,15 @@ def randomized_quicksort(arr):
 
     quicksort(arr, 0, len(arr) - 1)
     return arr
+
+test_cases = [
+    [],
+    [1],
+    [3, 1, 4, 1, 5, 9, 2],
+    [5, 5, 5, 5],
+    list(range(10)),
+    list(range(10, 0, -1))
+]
+
+for test in test_cases:
+    print(f"Original: {test} => Sorted: {randomized_quicksort(test.copy())}")
