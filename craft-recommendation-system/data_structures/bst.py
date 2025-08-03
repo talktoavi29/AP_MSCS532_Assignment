@@ -1,23 +1,35 @@
-class BSTNode:
-    def __init__(self, rating, provider_data):
-        self.rating = rating
-        self.data = provider_data
+class Node:
+    def __init__(self, key, data):
+        self.key = key
+        self.data = [data]
         self.left = None
         self.right = None
 
-    def insert(self, rating, provider_data):
-        if rating < self.rating:
-            self.left = self.left.insert(rating, provider_data) if self.left else BSTNode(rating, provider_data)
-        else:
-            self.right = self.right.insert(rating, provider_data) if self.right else BSTNode(rating, provider_data)
-        return self
+class BST:
+    def __init__(self):
+        self.root = None
 
-    def inorder(self, results=None):
-        if results is None:
-            results = []
-        if self.left:
-            self.left.inorder(results)
-        results.append((self.rating, self.data))
-        if self.right:
-            self.right.inorder(results)
-        return results
+    def insert(self, key, data):
+        self.root = self._insert(self.root, key, data)
+
+    def _insert(self, node, key, data):
+        if not node:
+            return Node(key, data)
+        if key < node.key:
+            node.left = self._insert(node.left, key, data)
+        elif key > node.key:
+            node.right = self._insert(node.right, key, data)
+        else:
+            node.data.append(data)
+        return node
+
+    def in_order(self):
+        result = []
+        self._in_order(self.root, result)
+        return result
+
+    def _in_order(self, node, result):
+        if node:
+            self._in_order(node.left, result)
+            result.extend(node.data)
+            self._in_order(node.right, result)
