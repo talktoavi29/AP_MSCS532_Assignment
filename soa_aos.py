@@ -40,3 +40,12 @@ print(f"N={N:,}")
 t_soa = bench(soa_numpy, x, y, z, label="SoA NumPy")
 t_aos = bench(aos_numpy, pts,      label="AoS NumPy")
 print(f"\nSpeedup (SoA over AoS): {t_aos/t_soa:.2f}x")
+
+import csv
+with open("aos_soa_results.csv", "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["variant", "best_seconds"])
+    w.writerow(["SoA_NumPy", t_soa])
+    w.writerow(["AoS_NumPy", t_aos])
+print("Wrote aos_soa_results.csv")
+
